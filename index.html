@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Coach - Your Witty Financial Companion</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>💰 Money Coach</h1>
+            <p class="tagline">Your warm, witty financial companion</p>
+        </header>
+
+        <!-- Setup Section (for first-time users) -->
+        <div id="setupSection" class="card setup-card">
+            <h2>👋 Welcome! Let's Get Started</h2>
+            <p>To get personalized, witty financial advice, you'll need to provide your OpenAI API key. Don't worry - it stays in your browser and is never shared.</p>
+
+            <div class="form-group">
+                <label for="apiKeyInput">Your OpenAI API Key:</label>
+                <input type="password" id="apiKeyInput" placeholder="sk-proj-..." />
+                <small>Get one at <a href="https://platform.openai.com/api-keys" target="_blank">platform.openai.com</a></small>
+            </div>
+
+            <div class="form-group">
+                <label for="monthlyBudgetInput">Monthly Budget (₹):</label>
+                <input type="number" id="monthlyBudgetInput" placeholder="25000" />
+            </div>
+
+            <button class="btn btn-primary" onclick="saveSetup()">Start Tracking 🚀</button>
+        </div>
+
+        <!-- Main App (hidden until setup) -->
+        <div id="mainApp" style="display: none;">
+            <!-- Settings Bar -->
+            <div class="settings-bar">
+                <div class="budget-display">
+                    <span>Monthly Budget: ₹<span id="budgetDisplay">0</span></span>
+                    <button class="btn-small" onclick="showSettings()">⚙️</button>
+                </div>
+            </div>
+
+            <!-- Expense Entry Card -->
+            <div class="card expense-card">
+                <h2>Log an Expense</h2>
+                <div class="form-group">
+                    <input type="text" id="expenseDescription" placeholder="e.g., Bought coffee" />
+                </div>
+                <div class="form-group">
+                    <input type="number" id="expenseAmount" placeholder="Amount (₹)" />
+                </div>
+                <div class="form-group">
+                    <select id="expenseCategory">
+                        <option value="food">🍔 Food & Dining</option>
+                        <option value="coffee">☕ Coffee & Drinks</option>
+                        <option value="shopping">🛍️ Shopping</option>
+                        <option value="transport">🚗 Transport</option>
+                        <option value="entertainment">🎬 Entertainment</option>
+                        <option value="bills">💡 Bills & Utilities</option>
+                        <option value="other">📦 Other</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" onclick="logExpense()">Log Expense 💸</button>
+            </div>
+
+            <!-- AI Coach Response -->
+            <div id="coachResponse" class="card coach-card" style="display: none;">
+                <div class="coach-avatar">🤖💬</div>
+                <div class="coach-message" id="coachMessage"></div>
+            </div>
+
+            <!-- This Week Summary -->
+            <div class="card stats-card">
+                <h3>This Week's Snapshot</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">₹<span id="weekSpending">0</span></div>
+                        <div class="stat-label">Spent This Week</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value"><span id="weekTransactions">0</span></div>
+                        <div class="stat-label">Transactions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">☕ <span id="coffeeCount">0</span></div>
+                        <div class="stat-label">Coffees/Drinks</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Expenses -->
+            <div class="card history-card">
+                <h3>Recent Expenses</h3>
+                <div id="expenseHistory" class="expense-list">
+                    <p class="empty-state">No expenses logged yet. Start tracking!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="settingsModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeSettings()">&times;</span>
+                <h2>Settings</h2>
+
+                <div class="form-group">
+                    <label for="settingsApiKey">OpenAI API Key:</label>
+                    <input type="password" id="settingsApiKey" />
+                </div>
+
+                <div class="form-group">
+                    <label for="settingsBudget">Monthly Budget (₹):</label>
+                    <input type="number" id="settingsBudget" />
+                </div>
+
+                <button class="btn btn-primary" onclick="updateSettings()">Save Changes</button>
+                <button class="btn btn-danger" onclick="resetAllData()">Reset All Data</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Built with ❤️ by Ashutosh | Data stored locally in your browser</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
